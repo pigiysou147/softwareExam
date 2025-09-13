@@ -1,7 +1,7 @@
 current_dsl_version: "0.3.1"
 kind: app
 app:
-  name: 数据库分级分类助手
+  name: 数据库分级分类助手 (MIN)
   mode: workflow
   icon: 📊
   icon_background: "#4CAF50"
@@ -38,8 +38,8 @@ workflow:
       - id: llm-classify
         type: llm
         name: Classify
-        provider: openai_compatible
-        model: deepseek-r1:7b
+        # 注意：为避免导入时的 provider/schema 不匹配，这里不指定 provider/model
+        # 导入后请在工作流编辑器中为该节点手动选择 OpenAI 兼容提供方与 deepseek-r1:7b 模型
         prompt: |
           你是数据库分级分类专家。根据策略与表结构为字段判定 level 与 tags，并仅输出 JSON 数组。
           策略：
@@ -69,6 +69,7 @@ workflow:
             value: "{{exportResp.body.file_path}}"
           - key: preview
             value: "{{llmContent[0:5]}}"
+
     edges:
       - from: input-1
         to: http-introspect

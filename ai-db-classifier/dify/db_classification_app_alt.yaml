@@ -1,7 +1,7 @@
 current_dsl_version: "0.3.1"
 kind: app
 app:
-  name: 数据库分级分类助手
+  name: 数据库分级分类助手 (ALT)
   mode: workflow
   icon: 📊
   icon_background: "#4CAF50"
@@ -38,8 +38,9 @@ workflow:
       - id: llm-classify
         type: llm
         name: Classify
-        provider: openai_compatible
-        model: deepseek-r1:7b
+        model:
+          provider: openai_compatible
+          name: deepseek-r1:7b
         prompt: |
           你是数据库分级分类专家。根据策略与表结构为字段判定 level 与 tags，并仅输出 JSON 数组。
           策略：
@@ -69,6 +70,7 @@ workflow:
             value: "{{exportResp.body.file_path}}"
           - key: preview
             value: "{{llmContent[0:5]}}"
+
     edges:
       - from: input-1
         to: http-introspect
