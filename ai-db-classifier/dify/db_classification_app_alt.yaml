@@ -1,0 +1,83 @@
+current_dsl_version: "0.3.1"
+kind: app
+app:
+  name: 数据库分级分类助手 (ALT)
+  mode: workflow
+  icon: 📊
+  icon_background: "#4CAF50"
+  description: 输入数据库信息，拉取表结构并进行分级分类，输出 Excel 清单。
+
+workflow:
+  graph:
+    nodes:
+      - id: input-1
+        type: input
+        name: Inputs
+        fields:
+          - key: database_url
+            type: string
+            required: true
+            default: "postgresql+psycopg://dify:dify@postgres:5432/difydb"
+          - key: policy_text
+            type: string
+            required: false
+            default: ""
+
+      - id: http-introspect
+        type: http_request
+        name: Introspect
+        method: POST
+        url: "http://schema-service:8000/introspect"
+        headers:
+          - name: Content-Type
+            value: application/json
+        body: |
+          {"database_url": "{{inputs.database_url}}"}
+        result: schemaResp
+
+      - id: llm-classify
+        type: llm
+        name: Classify
+        model:
+          provider: openai_compatible
+          name: deepseek-r1:7b
+        prompt: |
+          你是数据库分级分类专家。根据策略与表结构为字段判定 level 与 tags，并仅输出 JSON 数组。
+          策略：
+          {{inputs.policy_text}}
+          结构：
+          {{schemaResp.body.schema}}
+          仅输出 JSON 数组。
+        result: llmContent
+
+      - id: http-export
+        type: http_request
+        name: ExportExcel
+        method: POST
+        url: "http://schema-service:8000/export-excel"
+        headers:
+          - name: Content-Type
+            value: application/json
+        body: |
+          {"classification": {{llmContent}}, "output_filename": "db_classification.xlsx"}
+        result: exportResp
+
+      - id: output-1
+        type: output
+        name: Result
+        fields:
+          - key: file_path
+            value: "{{exportResp.body.file_path}}"
+          - key: preview
+            value: "{{llmContent[0:5]}}"
+
+    edges:
+      - from: input-1
+        to: http-introspect
+      - from: http-introspect
+        to: llm-classify
+      - from: llm-classify
+        to: http-export
+      - from: http-export
+        to: output-1
+

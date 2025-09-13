@@ -1,0 +1,15 @@
+{
+  "levels": [
+    {"name": "机密", "description": "极高敏感度，如密码、支付卡、密钥等"},
+    {"name": "敏感", "description": "个人身份信息、联系方式、位置等"},
+    {"name": "内部", "description": "内部业务数据，如订单号、交易金额等"},
+    {"name": "公开", "description": "不涉及隐私与机密的公开数据"}
+  ],
+  "heuristics": [
+    {"keywords": ["password", "pwd", "secret", "token", "api_key"], "level": "机密", "tags": ["Credential"]},
+    {"keywords": ["card", "cvv"], "level": "机密", "tags": ["Payment"]},
+    {"keywords": ["email", "phone", "mobile", "id_card", "identity"], "level": "敏感", "tags": ["PII"]},
+    {"keywords": ["order", "invoice", "amount"], "level": "内部", "tags": ["Transaction"]}
+  ]
+}
+

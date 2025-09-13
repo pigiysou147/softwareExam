@@ -1,0 +1,78 @@
+version: "3.8"
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    environment:
+      - OLLAMA_LOAD_TIMEOUT=1800
+    volumes:
+      - ollama-models:/root/.ollama
+    healthcheck:
+      test: ["CMD", "bash", "-lc", "curl -s http://localhost:11434/api/tags | grep -q 'models' || exit 1"]
+      interval: 20s
+      timeout: 5s
+      retries: 30
+    restart: unless-stopped
+
+  ollama-init:
+    image: ollama/ollama:latest
+    container_name: ollama-init
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      - OLLAMA_HOST=ollama
+    entrypoint: ["bash", "-lc", "ollama pull ${LLM_MODEL:-deepseek-r1:7b} && echo 'model ready' && sleep 2"]
+    networks:
+      - default
+    restart: "no"
+
+  postgres:
+    image: postgres:16
+    container_name: dify-sample-postgres
+    environment:
+      - POSTGRES_DB=difydb
+      - POSTGRES_USER=dify
+      - POSTGRES_PASSWORD=dify
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+      - ./sample_db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dify -d difydb"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  schema_service:
+    build:
+      context: ./fastapi_service
+    container_name: schema-service
+    depends_on:
+      postgres:
+        condition: service_healthy
+      ollama:
+        condition: service_started
+      ollama-init:
+        condition: service_completed_successfully
+    environment:
+      - DATABASE_URL=postgresql+psycopg://dify:dify@postgres:5432/difydb
+      - LLM_BASE_URL=http://ollama:11434/v1
+      - LLM_API_KEY=ollama
+      - LLM_MODEL=${LLM_MODEL:-deepseek-r1:7b}
+      - OUTPUT_DIR=/data/outputs
+      - LOG_LEVEL=info
+    volumes:
+      - ./outputs:/data/outputs
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+volumes:
+  pg-data: {}
+  ollama-models: {}
+
