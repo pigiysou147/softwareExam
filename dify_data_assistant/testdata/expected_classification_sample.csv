@@ -1,0 +1,12 @@
+database,table,column,data_type,comment,level,tags,rationale
+demo_db,users,id,bigint,,L4-Public,,rule:0 on text='id bigint '
+demo_db,users,name,varchar,姓名,L2-Sensitive,name,姓名,rule:90 on text='name varchar 姓名'
+demo_db,users,email,varchar,邮箱,L2-Sensitive,email,mail,rule:90 on text='email varchar 邮箱'
+demo_db,users,phone,varchar,手机号,L2-Sensitive,phone,手机号,mobile,rule:90 on text='phone varchar 手机号'
+demo_db,users,password_hash,varchar,密码哈希,L1-HighlySensitive,password,pwd,passwd,secret,rule:80 on text='password_hash varchar 密码哈希'
+demo_db,users,created_at,timestamp,,L4-Public,,rule:0 on text='created_at timestamp '
+demo_db,orders,id,bigint,,L4-Public,,rule:0 on text='id bigint '
+demo_db,orders,user_id,bigint,,L4-Public,,rule:0 on text='user_id bigint '
+demo_db,orders,amount,decimal,订单金额,L3-Internal,amount,salary,rule:85 on text='amount decimal 订单金额'
+demo_db,orders,status,varchar,,L4-Public,,rule:0 on text='status varchar '
+demo_db,orders,created_at,timestamp,,L4-Public,,rule:0 on text='created_at timestamp '

@@ -1,0 +1,96 @@
+schema_version: 1
+app:
+  mode: workflow
+  name: 数据分级分类助手 (MySQL -> Excel)
+  description: 基于 MySQL 表结构做分级分类并导出 Excel。可选使用 DeepSeek(经 Ollama)做结果修正。
+  workflow:
+    start: start
+    end: end
+    nodes:
+      - id: start
+        type: start
+        data:
+          variables:
+            - id: db_host
+              name: db_host
+              type: string
+              required: true
+            - id: db_port
+              name: db_port
+              type: number
+              required: false
+              default: 3306
+            - id: db_user
+              name: db_user
+              type: string
+              required: true
+            - id: db_password
+              name: db_password
+              type: secret
+              required: true
+            - id: db_name
+              name: db_name
+              type: string
+              required: true
+            - id: refine_by_llm
+              name: refine_by_llm
+              type: boolean
+              required: false
+              default: false
+      - id: http_call
+        type: http_request
+        data:
+          method: POST
+          url: http://host.docker.internal:8000/classify
+          headers:
+            Content-Type: application/json
+          body:
+            type: json
+            value:
+              connection:
+                host: "{{start.db_host}}"
+                port: {{start.db_port}}
+                user: "{{start.db_user}}"
+                password: "{{start.db_password}}"
+                database: "{{start.db_name}}"
+              refine_by_llm: {{start.refine_by_llm}}
+          output:
+            parse_type: json
+        position:
+          x: 320
+          y: 160
+        edges:
+          - id: e1
+            source: start
+            target: http_call
+      - id: file_node
+        type: file
+        data:
+          name: 数据分级清单.xlsx
+          mime_type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+          content:
+            type: base64
+            value: "{{http_call.body.excel_base64}}"
+        position:
+          x: 640
+          y: 160
+        edges:
+          - id: e2
+            source: http_call
+            target: file_node
+      - id: end
+        type: end
+        data:
+          outputs:
+            - id: excel_file
+              name: excel_file
+              type: file
+              value: "{{file_node.file}}"
+        position:
+          x: 920
+          y: 160
+        edges:
+          - id: e3
+            source: file_node
+            target: end
+
