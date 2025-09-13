@@ -1,0 +1,53 @@
+schema_version: 1
+app:
+  mode: workflow
+  name: 网页抓取到 Markdown（优化缓存）
+  description: 抓取网页正文并转 Markdown，内置缓存减少重复抓取耗时。
+  workflow:
+    start: start
+    end: end
+    nodes:
+      - id: start
+        type: start
+        data:
+          variables:
+            - id: url
+              name: url
+              type: string
+              required: true
+      - id: fetch
+        type: http_request
+        data:
+          method: POST
+          url: http://host.docker.internal:8000/scrape
+          headers:
+            Content-Type: application/json
+          body:
+            type: json
+            value:
+              url: "{{start.url}}"
+          output:
+            parse_type: json
+        position:
+          x: 320
+          y: 160
+        edges:
+          - id: e1
+            source: start
+            target: fetch
+      - id: end
+        type: end
+        data:
+          outputs:
+            - id: markdown
+              name: markdown
+              type: string
+              value: "{{fetch.body.markdown}}"
+        position:
+          x: 640
+          y: 160
+        edges:
+          - id: e2
+            source: fetch
+            target: end
+

@@ -1,0 +1,79 @@
+schema_version: 1
+app:
+  mode: workflow
+  name: 数据分级分类助手 (ALT)
+  description: 兼容版：MySQL -> Excel Base64。仅使用 start/http-request/end。
+  workflow:
+    start: start
+    end: end
+    nodes:
+      - id: start
+        type: start
+        data:
+          variables:
+            - id: db_host
+              name: db_host
+              type: string
+              required: true
+            - id: db_port
+              name: db_port
+              type: number
+              required: false
+              default: 3306
+            - id: db_user
+              name: db_user
+              type: string
+              required: true
+            - id: db_password
+              name: db_password
+              type: secret
+              required: true
+            - id: db_name
+              name: db_name
+              type: string
+              required: true
+            - id: refine_by_llm
+              name: refine_by_llm
+              type: boolean
+              required: false
+              default: false
+      - id: request
+        type: http-request
+        data:
+          method: POST
+          url: http://host.docker.internal:8000/classify
+          headers:
+            - name: Content-Type
+              value: application/json
+          body:
+            type: json
+            value:
+              connection:
+                host: "{{start.db_host}}"
+                port: {{start.db_port}}
+                user: "{{start.db_user}}"
+                password: "{{start.db_password}}"
+                database: "{{start.db_name}}"
+              refine_by_llm: {{start.refine_by_llm}}
+          timeout: 120
+          output:
+            parse_type: json
+      - id: end
+        type: end
+        data:
+          outputs:
+            - id: excel_base64
+              name: excel_base64
+              type: string
+              value: "{{request.body.excel_base64}}"
+            - id: rows
+              name: rows
+              type: object
+              value: "{{request.body.rows}}"
+    graph:
+      edges:
+        - source: start
+          target: request
+        - source: request
+          target: end
+
