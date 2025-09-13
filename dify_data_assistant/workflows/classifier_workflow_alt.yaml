@@ -1,8 +1,8 @@
 schema_version: 1
 app:
   mode: workflow
-  name: 数据分级分类助手 (MySQL -> Excel base64)
-  description: 从 MySQL 拉取表结构，规则+可选LLM修正进行分级分类，输出 Excel Base64 与 JSON 行。
+  name: 数据分级分类助手 (ALT)
+  description: 兼容版：MySQL -> Excel Base64。仅使用 start/http-request/end。
   workflow:
     start: start
     end: end
@@ -37,13 +37,14 @@ app:
               type: boolean
               required: false
               default: false
-      - id: http_call
-        type: http_request
+      - id: request
+        type: http-request
         data:
           method: POST
           url: http://host.docker.internal:8000/classify
           headers:
-            Content-Type: application/json
+            - name: Content-Type
+              value: application/json
           body:
             type: json
             value:
@@ -54,15 +55,9 @@ app:
                 password: "{{start.db_password}}"
                 database: "{{start.db_name}}"
               refine_by_llm: {{start.refine_by_llm}}
+          timeout: 120
           output:
             parse_type: json
-        position:
-          x: 320
-          y: 160
-        edges:
-          - id: e1
-            source: start
-            target: http_call
       - id: end
         type: end
         data:
@@ -70,16 +65,15 @@ app:
             - id: excel_base64
               name: excel_base64
               type: string
-              value: "{{http_call.body.excel_base64}}"
+              value: "{{request.body.excel_base64}}"
             - id: rows
               name: rows
               type: object
-              value: "{{http_call.body.rows}}"
-        position:
-          x: 640
-          y: 160
-        edges:
-          - id: e2
-            source: http_call
-            target: end
+              value: "{{request.body.rows}}"
+    graph:
+      edges:
+        - source: start
+          target: request
+        - source: request
+          target: end
 
