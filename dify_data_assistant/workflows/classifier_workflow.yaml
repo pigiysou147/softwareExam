@@ -53,7 +53,7 @@ app:
                 user: "{{start.db_user}}"
                 password: "{{start.db_password}}"
                 database: "{{start.db_name}}"
-              refine_by_llm: {{start.refine_by_llm}}
+              refine_by_llm: "{{start.refine_by_llm}}"
           output:
             parse_type: json
         position:
