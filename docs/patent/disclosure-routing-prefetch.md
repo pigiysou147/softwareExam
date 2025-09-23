@@ -45,35 +45,35 @@ S5. 记录命中率/耗时/带宽/回退率等指标，进行反事实评估用�
 ```mermaid
 graph LR
   subgraph Client[客户端]
-    UI[UI/页面] --> Router[Router 中间件]
-    Router --> PrefPlan[预取计划(等级/时序/TTL)]
+    UI[页面UI] --> Router[Router中间件]
+    Router --> PrefPlan[预取计划 等级 时序 TTL]
     PrefPlan --> SW[Service Worker 执行器]
-    SW --> Cache[CacheStorage / IndexedDB]
-    Telemetry[埋点与画像采集] -->|会话/网络/设备/命中/耗时| LogBuf[本地日志缓冲]
-    OnDev[端侧轻量模型(蒸馏)] -.预测路由概率/资源效用.-> Router
+    SW --> Cache[缓存存储]
+    Telemetry[埋点与画像采集] --> LogBuf[本地日志缓冲]
+    OnDev[端侧轻量模型] --> Router
   end
 
-  subgraph Edge[边缘/网关(可选)]
-    EdgeCtrl[策略下发 / 灰度与回滚]
+  subgraph Edge[边缘网关]
+    EdgeCtrl[策略下发 灰度 回滚]
   end
 
   subgraph Cloud[云侧]
     LLM[大模型策略服务]
-    Solver[预算约束求解 / 阈值生成]
-    PolicyRepo[策略/版本/白名单]
-    Offline[反事实评估 / 训练与蒸馏]
+    Solver[预算约束求解 阈值生成]
+    PolicyRepo[策略 版本 白名单]
+    Offline[反事实评估 训练 蒸馏]
   end
 
-  Router -.冷启动/置信度低时-> LLM
+  Router --> LLM
   LLM --> Solver
-  Solver -->|等级/TTL/阈值| EdgeCtrl
-  EdgeCtrl -->|策略下发| OnDev
-  EdgeCtrl -->|策略下发| Router
+  Solver --> EdgeCtrl
+  EdgeCtrl --> OnDev
+  EdgeCtrl --> Router
   Router --> SW
-  SW -->|并发/退避/降级| Network[(网络)]
+  SW --> Network[网络]
   SW --> UI
   LogBuf --> Offline
-  Offline -->|蒸馏/量化权重| OnDev
+  Offline --> OnDev
   Offline --> PolicyRepo
   PolicyRepo --> EdgeCtrl
 ```
@@ -81,22 +81,23 @@ graph LR
 ### 图2 程序逻辑流程图（方法流程）
 ```mermaid
 flowchart TD
-  A[开始] --> B[采集上下文: 当前/候选路由; 会话/设备/网络画像; 历史命中/耗时]
+  A[开始] --> B[采集上下文]
   B --> C{端侧模型可用且置信度足够?}
-  C -- 是 --> D[端侧模型输出: 路由概率分布 + 资源效用得分]
-  C -- 否 --> E[调用云侧LLM: 返回概率/效用 + 解释]
-  D --> F[合成候选集: 资源ID/等级候选/置信度/解释]
+  C -->|是| D[端侧模型输出 概率 与 效用]
+  C -->|否| E[调用云侧LLM 返回 概率 效用 解释]
+  D --> F[合成候选集]
   E --> F
-  F --> G[建模约束: 带宽/CPU/存储/隐私/权限]
-  G --> H[预算求解: 等级/时序/TTL/淘汰优先级]
+  F --> G[建模约束]
+  G --> H[预算求解 生成计划]
   H --> I[下发计划至 Service Worker]
-  I --> J[SW 执行: 优先队列并发; 退避; stale-while-revalidate]
-  J --> K{状态变化? (网络/前后台/标签页)}
-  K -- 是 --> L[在线重排/取消/降级; 动态TTL调整] --> J
-  K -- 否 --> M[路由切换: 先读缓存, 未命中则兜底请求]
-  M --> N[记录指标: 命中率/首屏&二跳耗时/带宽/回退率]
-  N --> O[反事实评估: 不同分级/窗口收益估计; 阈值校准]
-  O --> P[可选: 更新端侧模型/阈值/灰度策略]
+  I --> J[SW 执行 优先队列 并发 退避 SWR]
+  J --> K{状态变化?}
+  K -->|是| L[重排 取消 降级 动态TTL]
+  L --> J
+  K -->|否| M[路由切换 先读缓存 未命中兜底]
+  M --> N[记录指标]
+  N --> O[反事实评估 阈值校准]
+  O --> P[更新端侧模型 阈值 灰度]
   P --> Q[结束]
 ```
 
@@ -146,17 +147,17 @@ sequenceDiagram
 ### 图4 异常与降级处理流程图
 ```mermaid
 flowchart TD
-  A[开始] --> B{异常/风险触发?}
-  B -->|404/循环/鉴权失败| C[构造语义修复候选(基于路由/参数/历史)]
-  B -->|网络恶化/预算超限| D[执行降级: 降低等级/取消未开始任务]
-  C --> E[合规校验: 权限/隐私/白名单/CORS]
-  E -->|通过| F[执行修复: 改写URL/替代目标/引导登录]
-  E -->|不通过| G[回退到安全路径/提示用户]
-  D --> H[动态TTL与并发重配; 退避与延迟启动]
-  F --> I[记录恢复耗时/继续浏览率]
+  A[开始] --> B{是否触发异常或风险}
+  B -->|路由异常| C[构造语义修复候选]
+  B -->|网络恶化或预算超限| D[执行降级 降低等级 取消未开始]
+  C --> E[合规校验 权限 隐私 白名单 CORS]
+  E -->|通过| F[执行修复 改写URL 替代目标 引导登录]
+  E -->|不通过| G[回退到安全路径 提示用户]
+  D --> H[动态TTL 并发重配 退避 延迟启动]
+  F --> I[记录恢复耗时 继续浏览率]
   G --> I
   H --> I
-  I --> J[更新阈值/策略(灰度)]
+  I --> J[更新阈值与策略 灰度]
   J --> K[结束]
 ```
 
@@ -179,7 +180,7 @@ classDiagram
   }
 
   class NetworkProfile {
-    +string type  // wifi/4g/5g/ethernet
+    +string type
     +int rttMs
     +int downlinkKbps
     +bool saveData
@@ -214,18 +215,18 @@ classDiagram
   class PreloadPlanItem {
     +string resourceId
     +Grade grade
-    +string startTrigger  // hover/click/idle/visibility
+    +string startTrigger
     +int ttlMs
     +int evictionPriority
     +int concurrencyWeight
-    +string retryPolicy  // backoff/jitter/maxRetry
+    +string retryPolicy
     +bool cancelOnNetworkDegrade
   }
 
   class PreloadPlan {
     +PreloadPlanItem[] items
     +string version
-    +string issuer  // router/sw/edge
+    +string issuer
     +string createdAt
   }
 
@@ -255,13 +256,11 @@ classDiagram
     PWA_ASSET
   }
 
-  SessionContext "1" --> "*" ResourceNode : derives graph
-  PreloadCandidate "*" --> "1" ResourceNode : targets
-  PreloadPlan "1" *-- "*" PreloadPlanItem
-  BudgetConstraints <.. PreloadPlan : constraints
-  Metrics <.. PreloadPlan : logs
-
-  note for PreloadPlanItem "TTL = f(probability, resourceType, networkQuality, cachePressure, retries)"
+  SessionContext --> ResourceNode
+  PreloadCandidate --> ResourceNode
+  PreloadPlan *-- PreloadPlanItem
+  BudgetConstraints <.. PreloadPlan
+  Metrics <.. PreloadPlan
 ```
 
 ## 8. 具体实施方式
