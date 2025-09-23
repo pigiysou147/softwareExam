@@ -78,6 +78,8 @@ graph LR
   PolicyRepo --> EdgeCtrl
 ```
 
+如在 GitHub 无法渲染，请查看 SVG：`docs/patent/diagrams/fig1-arch.svg`
+
 ### 图2 程序逻辑流程图（方法流程）
 ```mermaid
 flowchart TD
@@ -100,6 +102,8 @@ flowchart TD
   O --> P[更新端侧模型 阈值 灰度]
   P --> Q[结束]
 ```
+
+如在 GitHub 无法渲染，请查看 SVG：`docs/patent/diagrams/fig2-flow.svg`
 
 ### 图3 界面交互流程图（用户-系统时序）
 ```mermaid
@@ -144,6 +148,8 @@ sequenceDiagram
   R-->>S: 日志归集(用于离线反事实评估/蒸馏)
 ```
 
+如在 GitHub 无法渲染，请查看 SVG：`docs/patent/diagrams/fig3-seq.svg`
+
 ### 图4 异常与降级处理流程图
 ```mermaid
 flowchart TD
@@ -160,6 +166,8 @@ flowchart TD
   I --> J[更新阈值与策略 灰度]
   J --> K[结束]
 ```
+
+如在 GitHub 无法渲染，请查看 SVG：`docs/patent/diagrams/fig4-exception.svg`
 
 ### 图5 数据结构示意图（类图）
 ```mermaid
@@ -239,14 +247,14 @@ classDiagram
     +float rollbackRate
   }
 
-  class Grade <<enumeration>> {
+  class Grade {
     CRITICAL
     HIGH
     LOW
     DEFERRED
   }
 
-  class ResourceType <<enumeration>> {
+  class ResourceType {
     HTML
     JS
     CSS
@@ -262,6 +270,8 @@ classDiagram
   BudgetConstraints <.. PreloadPlan
   Metrics <.. PreloadPlan
 ```
+
+如在 GitHub 无法渲染，请查看 SVG：`docs/patent/diagrams/fig5-classes.svg`
 
 ## 8. 具体实施方式
 ### 8.1 名词定义

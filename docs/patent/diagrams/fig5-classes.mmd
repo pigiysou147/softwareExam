@@ -1,0 +1,99 @@
+classDiagram
+  class SessionContext {
+    +string sessionId
+    +DeviceProfile device
+    +NetworkProfile network
+    +string currentRoute
+    +string[] candidateRoutes
+  }
+
+  class DeviceProfile {
+    +string userAgent
+    +int memoryGB
+    +int cpuCores
+    +bool lowPowerMode
+  }
+
+  class NetworkProfile {
+    +string type
+    +int rttMs
+    +int downlinkKbps
+    +bool saveData
+  }
+
+  class ResourceNode {
+    +string resourceId
+    +ResourceType type
+    +string url
+    +float sizeKB
+    +string[] deps
+    +bool privacySensitive
+    +bool crossOrigin
+  }
+
+  class PreloadCandidate {
+    +string routeId
+    +string resourceId
+    +float probability
+    +float utilityScore
+    +string explanation
+  }
+
+  class BudgetConstraints {
+    +int bandwidthKbps
+    +int cpuBudget
+    +int storageMB
+    +string[] privacyWhitelist
+    +string[] privacyBlacklist
+  }
+
+  class PreloadPlanItem {
+    +string resourceId
+    +Grade grade
+    +string startTrigger
+    +int ttlMs
+    +int evictionPriority
+    +int concurrencyWeight
+    +string retryPolicy
+    +bool cancelOnNetworkDegrade
+  }
+
+  class PreloadPlan {
+    +PreloadPlanItem[] items
+    +string version
+    +string issuer
+    +string createdAt
+  }
+
+  class Metrics {
+    +float lcpMs
+    +float ttiMs
+    +float secondHopMs
+    +float hitRate
+    +float bandwidthUsedKB
+    +float rollbackRate
+  }
+
+  class Grade {
+    CRITICAL
+    HIGH
+    LOW
+    DEFERRED
+  }
+
+  class ResourceType {
+    HTML
+    JS
+    CSS
+    IMG
+    FONT
+    DATA
+    PWA_ASSET
+  }
+
+  SessionContext --> ResourceNode
+  PreloadCandidate --> ResourceNode
+  PreloadPlan *-- PreloadPlanItem
+  BudgetConstraints <.. PreloadPlan
+  Metrics <.. PreloadPlan
+

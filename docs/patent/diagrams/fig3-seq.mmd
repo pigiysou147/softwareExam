@@ -1,0 +1,40 @@
+sequenceDiagram
+  participant U as 用户
+  participant UI as 页面UI
+  participant R as Router中间件
+  participant M as 端侧模型
+  participant A as 云侧LLM
+  participant S as 预算求解器
+  participant W as Service Worker
+  participant C as 缓存
+  participant N as 网络
+
+  U->>UI: 点击/悬停/输入 触发候选路由
+  UI->>R: 上报上下文 会话 网络 设备 候选
+  R->>M: 预测 路由概率 资源效用
+  alt 置信度不足或冷启动
+    R->>A: 请求 LLM 推断
+    A-->>R: 返回 概率 效用 解释
+  end
+  R->>S: 预算与约束求解请求
+  S-->>R: 返回 分级预取计划
+  R->>W: 下发计划
+  par 分级预取执行
+    W->>N: 并发下载 退避 限制 降级
+    N-->>W: 响应
+    W->>C: 写入缓存 动态TTL SWR
+  and 状态变化
+    UI-->>W: 网络 前后台 标签页 变化
+    W->>W: 取消 重排 降级
+  end
+  U->>UI: 导航确认
+  UI->>C: 读取缓存
+  alt 命中
+    C-->>UI: 资源数据
+  else 未命中
+    UI->>N: 兜底请求
+    N-->>UI: 响应
+  end
+  UI-->>R: 上报指标 命中 耗时 带宽 回退
+  R-->>S: 日志归集 用于离线评估 蒸馏
+

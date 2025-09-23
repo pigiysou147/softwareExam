@@ -1,0 +1,34 @@
+graph LR
+  subgraph Client[客户端]
+    UI[页面UI] --> Router[Router中间件]
+    Router --> PrefPlan[预取计划 等级 时序 TTL]
+    PrefPlan --> SW[Service Worker 执行器]
+    SW --> Cache[缓存存储]
+    Telemetry[埋点与画像采集] --> LogBuf[本地日志缓冲]
+    OnDev[端侧轻量模型] --> Router
+  end
+
+  subgraph Edge[边缘网关]
+    EdgeCtrl[策略下发 灰度 回滚]
+  end
+
+  subgraph Cloud[云侧]
+    LLM[大模型策略服务]
+    Solver[预算约束求解 阈值生成]
+    PolicyRepo[策略 版本 白名单]
+    Offline[反事实评估 训练 蒸馏]
+  end
+
+  Router --> LLM
+  LLM --> Solver
+  Solver --> EdgeCtrl
+  EdgeCtrl --> OnDev
+  EdgeCtrl --> Router
+  Router --> SW
+  SW --> Network[网络]
+  SW --> UI
+  LogBuf --> Offline
+  Offline --> OnDev
+  Offline --> PolicyRepo
+  PolicyRepo --> EdgeCtrl
+
