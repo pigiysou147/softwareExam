@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <defs>
+    <style>
+      .box{fill:#ffffff;stroke:#2c3e50;stroke-width:2}
+      .title{font:700 20px Arial;fill:#2c3e50}
+      .label{font:14px Arial;fill:#2c3e50}
+      .line{stroke:#2c3e50;stroke-width:2;fill:none;marker-end:url(#arr)}
+    </style>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2c3e50"/>
+    </marker>
+  </defs>
+
+  <text x="600" y="40" text-anchor="middle" class="title">程序逻辑流程（方法步骤）</text>
+
+  <rect x="80" y="80" width="280" height="70" rx="10" class="box"/>
+  <text x="100" y="120" class="label">S1 采集上下文 与 路由资源图</text>
+
+  <rect x="460" y="80" width="280" height="70" rx="10" class="box"/>
+  <text x="480" y="120" class="label">S2 大模型预测 概率/效用/解释</text>
+
+  <rect x="840" y="80" width="280" height="70" rx="10" class="box"/>
+  <text x="860" y="120" class="label">合成候选集</text>
+
+  <path class="line" d="M 360 115 L 460 115"/>
+  <path class="line" d="M 740 115 L 840 115"/>
+
+  <rect x="80" y="230" width="280" height="70" rx="10" class="box"/>
+  <text x="100" y="270" class="label">S3 建模约束：带宽/CPU/存储/隐私/权限</text>
+
+  <rect x="460" y="230" width="280" height="70" rx="10" class="box"/>
+  <text x="480" y="270" class="label">预算求解：等级/时序/TTL/淘汰优先级</text>
+
+  <rect x="840" y="230" width="280" height="70" rx="10" class="box"/>
+  <text x="860" y="270" class="label">生成分级预取计划</text>
+
+  <path class="line" d="M 360 265 L 460 265"/>
+  <path class="line" d="M 740 265 L 840 265"/>
+
+  <rect x="80" y="380" width="280" height="70" rx="10" class="box"/>
+  <text x="100" y="420" class="label">S4 下发计划至 Service Worker</text>
+
+  <rect x="460" y="380" width="280" height="70" rx="10" class="box"/>
+  <text x="480" y="420" class="label">SW 执行：优先队列/并发/退避/SWR</text>
+
+  <rect x="840" y="380" width="280" height="70" rx="10" class="box"/>
+  <text x="860" y="420" class="label">状态变化：重排/取消/降级/动态TTL</text>
+
+  <path class="line" d="M 360 415 L 460 415"/>
+  <path class="line" d="M 740 415 L 840 415"/>
+
+  <rect x="80" y="530" width="280" height="70" rx="10" class="box"/>
+  <text x="100" y="570" class="label">路由切换：先读缓存 未命中兜底</text>
+
+  <rect x="460" y="530" width="280" height="70" rx="10" class="box"/>
+  <text x="480" y="570" class="label">S5 记录指标：命中/耗时/带宽/回退</text>
+
+  <rect x="840" y="530" width="280" height="70" rx="10" class="box"/>
+  <text x="860" y="570" class="label">反事实评估：阈值/预算校准</text>
+
+  <path class="line" d="M 360 565 L 460 565"/>
+  <path class="line" d="M 740 565 L 840 565"/>
+
+  <rect x="460" y="680" width="280" height="70" rx="10" class="box"/>
+  <text x="480" y="720" class="label">（可选）更新端侧模型/阈值/灰度</text>
+
+  <path class="line" d="M 980 600 L 980 720 L 740 720"/>
+</svg>

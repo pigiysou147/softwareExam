@@ -27,11 +27,11 @@
 在固定预算内最大化首屏与二跳收益，自适应网络/设备差异，具备可解释审计与灰度回滚；端云蒸馏实现端侧毫秒级推断。
 
 ## 六、附图说明
-- 图1 系统架构图（`docs/patent/diagrams/fig1-arch.svg` / `.png`）
-- 图2 程序逻辑流程图（`docs/patent/diagrams/fig2-flow.svg` / `.png`）
-- 图3 界面交互时序图（`docs/patent/diagrams/fig3-seq.svg` / `.png`）
-- 图4 异常与降级处理流程图（`docs/patent/diagrams/fig4-exception.svg` / `.png`）
-- 图5 数据结构示意图（`docs/patent/diagrams/fig5-classes.svg` / `.png`）
+- 图1 系统架构图（`docs/patent/pro-diagrams/pro-fig1-arch.png`）
+- 图2 程序逻辑流程图（`docs/patent/pro-diagrams/pro-fig2-flow.png`）
+- 图3 界面交互时序图（`docs/patent/pro-diagrams/pro-fig3-seq.png`）
+- 图4 异常与降级处理流程图（`docs/patent/pro-diagrams/pro-fig4-exception.png`）
+- 图5 数据结构示意图（`docs/patent/pro-diagrams/pro-fig5-classes.png`）
 
 ## 七、具体实施方式
 ### 7.1 术语
@@ -50,7 +50,7 @@
 跨域白/黑名单、隐私标签、权限过滤，不在高隐私会话预取高敏资源。
 
 ## 八、权利要求书建议（摘要）
-- 方法权（独立）：包含步骤1)–5)，限定大模型输出“路由概率+资源效用+解释”；预算求解产出“等级/时序/TTL/淘汰”；SW 执行具备并发控制/退避/SWR/动态TTL/降级取消/在线重排；记录指标并用反事实评估校准。
+- 方法权（独立）：包含步骤1)–5)，限定大模型输出“路由概率+资源效用+解释”；预算求解产出“等级/时序/TTL/淘汰优先级”；SW 执行支持并发控制、退避、SWR、动态TTL、降级/取消与在线重排；记录指标并进行反事实评估用于阈值校准。
 - 系统权（独立）：对应模块划分。
 - 装置/介质权（并列）。
 - 从属权：动态TTL函数；网络恶化降级；多标签页去重；反事实评估；端云蒸馏与灰度热更新。

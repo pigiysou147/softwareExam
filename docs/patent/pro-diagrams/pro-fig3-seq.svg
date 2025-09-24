@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs>
+    <style>
+      .title{font:700 20px Arial;fill:#2c3e50}
+      .actor{font:700 14px Arial;fill:#2c3e50}
+      .label{font:13px Arial;fill:#2c3e50}
+      .lane{stroke:#95a5a6;stroke-width:1}
+      .msg{stroke:#2c3e50;stroke-width:2;marker-end:url(#arr)}
+    </style>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2c3e50"/>
+    </marker>
+  </defs>
+
+  <text x="700" y="40" text-anchor="middle" class="title">界面交互时序</text>
+
+  <!-- lifelines -->
+  <g transform="translate(80,80)">
+    <text class="actor" x="0" y="0">用户</text>
+    <line class="lane" x1="0" y1="20" x2="0" y2="760"/>
+  </g>
+  <g transform="translate(260,80)">
+    <text class="actor" x="0" y="0">页面UI</text>
+    <line class="lane" x1="0" y1="20" x2="0" y2="760"/>
+  </g>
+  <g transform="translate(440,80)">
+    <text class="actor" x="0" y="0">Router</text>
+    <line class="lane" x1="0" y1="20" x2="0" y2="760"/>
+  </g>
+  <g transform="translate(620,80)">
+    <text class="actor" x="0" y="0">端侧模型</text>
+    <line class="lane" x1="0" y1="20" x2="0" y2="760"/>
+  </g>
+  <g transform="translate(800,80)">
+    <text class="actor" x="0" y="0">云侧LLM</text>
+    <line class="lane" x1="0" y1="20" x2="0" y2="760"/>
+  </g>
+  <g transform="translate(980,80)">
+    <text class="actor" x="0" y="0">求解器</text>
+    <line class="lane" x1="0" y1="20" x2="0" y2="760"/>
+  </g>
+  <g transform="translate(1160,80)">
+    <text class="actor" x="0" y="0">SW/缓存</text>
+    <line class="lane" x1="0" y1="20" x2="0" y2="760"/>
+  </g>
+
+  <!-- messages -->
+  <path class="msg" d="M 80 140 L 260 140"/>
+  <text class="label" x="170" y="130" text-anchor="middle">点击/悬停/输入</text>
+
+  <path class="msg" d="M 260 200 L 440 200"/>
+  <text class="label" x="350" y="190" text-anchor="middle">上报上下文</text>
+
+  <path class="msg" d="M 440 260 L 620 260"/>
+  <text class="label" x="530" y="250" text-anchor="middle">预测 概率/效用</text>
+
+  <path class="msg" d="M 440 320 L 800 320"/>
+  <text class="label" x="620" y="310" text-anchor="middle">低置信/冷启动 请求LLM</text>
+
+  <path class="msg" d="M 800 380 L 440 380"/>
+  <text class="label" x="620" y="370" text-anchor="middle">返回 概率/效用/解释</text>
+
+  <path class="msg" d="M 440 440 L 980 440"/>
+  <text class="label" x="710" y="430" text-anchor="middle">预算与约束求解请求</text>
+
+  <path class="msg" d="M 980 500 L 440 500"/>
+  <text class="label" x="710" y="490" text-anchor="middle">分级预取计划</text>
+
+  <path class="msg" d="M 440 560 L 1160 560"/>
+  <text class="label" x="800" y="550" text-anchor="middle">下发计划</text>
+
+  <path class="msg" d="M 1160 620 L 1160 660"/>
+  <text class="label" x="1160" y="650" text-anchor="middle">并发/退避/SWR</text>
+
+  <path class="msg" d="M 1160 700 L 260 700"/>
+  <text class="label" x="710" y="690" text-anchor="middle">命中或兜底 → UI</text>
+
+  <path class="msg" d="M 260 760 L 980 760"/>
+  <text class="label" x="620" y="750" text-anchor="middle">指标上报 → 离线评估/蒸馏</text>
+</svg>

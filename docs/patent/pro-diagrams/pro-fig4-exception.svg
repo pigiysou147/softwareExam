@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="800" viewBox="0 0 1100 800">
+  <defs>
+    <style>
+      .box{fill:#ffffff;stroke:#2c3e50;stroke-width:2}
+      .title{font:700 20px Arial;fill:#2c3e50}
+      .label{font:14px Arial;fill:#2c3e50}
+      .line{stroke:#2c3e50;stroke-width:2;fill:none;marker-end:url(#arr)}
+    </style>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2c3e50"/>
+    </marker>
+  </defs>
+  <text x="550" y="40" text-anchor="middle" class="title">异常与降级处理流程</text>
+
+  <rect x="440" y="80" width="220" height="70" rx="10" class="box"/>
+  <text x="460" y="120" class="label">是否触发异常或风险</text>
+
+  <rect x="80" y="200" width="320" height="70" rx="10" class="box"/>
+  <text x="100" y="240" class="label">路由异常：404/循环/鉴权失败</text>
+
+  <rect x="700" y="200" width="320" height="70" rx="10" class="box"/>
+  <text x="720" y="240" class="label">网络恶化或预算超限</text>
+
+  <path class="line" d="M 550 150 L 240 200"/>
+  <path class="line" d="M 550 150 L 860 200"/>
+
+  <rect x="80" y="320" width="320" height="70" rx="10" class="box"/>
+  <text x="100" y="360" class="label">构造语义修复候选</text>
+
+  <rect x="700" y="320" width="320" height="70" rx="10" class="box"/>
+  <text x="720" y="360" class="label">执行降级：降低等级/取消未开始</text>
+
+  <path class="line" d="M 240 270 L 240 320"/>
+  <path class="line" d="M 860 270 L 860 320"/>
+
+  <rect x="80" y="440" width="320" height="70" rx="10" class="box"/>
+  <text x="100" y="480" class="label">合规校验：权限/隐私/白名单/CORS</text>
+
+  <rect x="80" y="560" width="320" height="70" rx="10" class="box"/>
+  <text x="100" y="600" class="label">通过 → 改写URL/替代目标/引导登录</text>
+
+  <rect x="80" y="640" width="320" height="70" rx="10" class="box"/>
+  <text x="100" y="680" class="label">不通过 → 回退到安全路径/提示</text>
+
+  <path class="line" d="M 240 390 L 240 440"/>
+  <path class="line" d="M 240 510 L 240 560"/>
+  <path class="line" d="M 240 510 L 240 640"/>
+
+  <rect x="700" y="440" width="320" height="70" rx="10" class="box"/>
+  <text x="720" y="480" class="label">动态TTL/并发重配/退避/延迟</text>
+
+  <rect x="440" y="720" width="220" height="70" rx="10" class="box"/>
+  <text x="455" y="760" class="label">更新阈值与策略（灰度）</text>
+
+  <path class="line" d="M 240 710 L 550 720"/>
+  <path class="line" d="M 860 510 L 550 720"/>
+</svg>
