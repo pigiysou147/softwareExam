@@ -65,20 +65,19 @@
   <text x="815" y="425" class="label">反事实评估 / 训练与蒸馏</text>
 
   <!-- Lines -->
-  <path class="line" d="M 210 260 L 450 260"/>
-  <text x="330" y="250" class="small" text-anchor="middle">策略请求/候选</text>
+  <path class="line" d="M 210 250 L 450 250"/>
+  <text x="330" y="240" class="small" text-anchor="middle">策略请求/候选</text>
 
-  <path class="line" d="M 730 260 L 800 260"/>
-  <text x="765" y="245" class="small" text-anchor="middle">转发</text>
+  <path class="line" d="M 730 270 L 800 270"/>
+  <text x="765" y="260" class="small" text-anchor="middle">转发</text>
 
   <path class="line" d="M 970 295 L 970 360"/>
-  <path class="line" d="M 970 465 L 970 520"/>
 
-  <path class="line" d="M 1120 260 L 770 260"/>
-  <text x="945" y="250" class="small" text-anchor="middle">返回策略与阈值</text>
+  <path class="line" d="M 1120 300 L 770 300"/>
+  <text x="945" y="290" class="small" text-anchor="middle">返回策略与阈值</text>
 
-  <path class="line" d="M 450 175 L 360 175"/>
-  <text x="405" y="165" class="small" text-anchor="middle">下发</text>
+  <path class="line" d="M 450 290 L 360 290"/>
+  <text x="405" y="280" class="small" text-anchor="middle">下发</text>
 
   <path class="line" d="M 210 420 L 210 460"/>
   <text x="210" y="445" class="small" text-anchor="middle">写入缓存</text>
