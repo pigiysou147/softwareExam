@@ -6,6 +6,7 @@
       .label{font:13px Arial;fill:#2c3e50}
       .lane{stroke:#95a5a6;stroke-width:1}
       .msg{stroke:#2c3e50;stroke-width:2;marker-end:url(#arr)}
+      .abox{fill:#f8fbff;stroke:#2c3e50;stroke-width:1.5}
     </style>
     <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#2c3e50"/>
@@ -16,32 +17,39 @@
 
   <!-- lifelines -->
   <g transform="translate(80,80)">
-    <text class="actor" x="0" y="0">用户</text>
-    <line class="lane" x1="0" y1="20" x2="0" y2="760"/>
+    <rect class="abox" x="-70" y="-10" width="140" height="40" rx="6"/>
+    <text class="actor" x="0" y="15" text-anchor="middle">用户</text>
+    <line class="lane" x1="0" y1="40" x2="0" y2="800"/>
   </g>
   <g transform="translate(260,80)">
-    <text class="actor" x="0" y="0">页面UI</text>
-    <line class="lane" x1="0" y1="20" x2="0" y2="760"/>
+    <rect class="abox" x="-70" y="-10" width="140" height="40" rx="6"/>
+    <text class="actor" x="0" y="15" text-anchor="middle">页面UI</text>
+    <line class="lane" x1="0" y1="40" x2="0" y2="800"/>
   </g>
   <g transform="translate(440,80)">
-    <text class="actor" x="0" y="0">Router</text>
-    <line class="lane" x1="0" y1="20" x2="0" y2="760"/>
+    <rect class="abox" x="-70" y="-10" width="140" height="40" rx="6"/>
+    <text class="actor" x="0" y="15" text-anchor="middle">Router</text>
+    <line class="lane" x1="0" y1="40" x2="0" y2="800"/>
   </g>
   <g transform="translate(620,80)">
-    <text class="actor" x="0" y="0">端侧模型</text>
-    <line class="lane" x1="0" y1="20" x2="0" y2="760"/>
+    <rect class="abox" x="-70" y="-10" width="140" height="40" rx="6"/>
+    <text class="actor" x="0" y="15" text-anchor="middle">端侧模型</text>
+    <line class="lane" x1="0" y1="40" x2="0" y2="800"/>
   </g>
   <g transform="translate(800,80)">
-    <text class="actor" x="0" y="0">云侧LLM</text>
-    <line class="lane" x1="0" y1="20" x2="0" y2="760"/>
+    <rect class="abox" x="-70" y="-10" width="140" height="40" rx="6"/>
+    <text class="actor" x="0" y="15" text-anchor="middle">云侧LLM</text>
+    <line class="lane" x1="0" y1="40" x2="0" y2="800"/>
   </g>
   <g transform="translate(980,80)">
-    <text class="actor" x="0" y="0">求解器</text>
-    <line class="lane" x1="0" y1="20" x2="0" y2="760"/>
+    <rect class="abox" x="-70" y="-10" width="140" height="40" rx="6"/>
+    <text class="actor" x="0" y="15" text-anchor="middle">求解器</text>
+    <line class="lane" x1="0" y1="40" x2="0" y2="800"/>
   </g>
   <g transform="translate(1160,80)">
-    <text class="actor" x="0" y="0">SW/缓存</text>
-    <line class="lane" x1="0" y1="20" x2="0" y2="760"/>
+    <rect class="abox" x="-80" y="-10" width="160" height="40" rx="6"/>
+    <text class="actor" x="0" y="15" text-anchor="middle">SW/缓存</text>
+    <line class="lane" x1="0" y1="40" x2="0" y2="800"/>
   </g>
 
   <!-- messages -->
