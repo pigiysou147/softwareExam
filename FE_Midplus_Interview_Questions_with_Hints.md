@@ -189,3 +189,52 @@ F) WebSocket 断线重连与幂等（扩展）
 28) 低端机卡顿与掉帧，如何定位热点并缓解？
 - 期望要点：Performance/Profiler、任务切片、Offscreen/Worker
 
+### Vue 3 专项（中高级，含提示点）
+1) 响应式系统与陷阱
+- 提示点：`ref` vs `reactive` 解包规则；`toRef/toRefs`；解构/闭包/跨组件传递导致丢失；`shallowRef/shallowReactive` 的使用场景；`markRaw/readonly` 的边界。
+
+2) computed / watch / watchEffect 策略
+- 提示点：computed 纯派生与缓存；`watch({ deep, immediate, flush })` 取舍；依赖循环与防抖/节流；`watchEffect` 的依赖收集与清理。
+
+3) 组件通信与 `v-model` 机制
+- 提示点：`modelValue`/`update:modelValue` 契约；多 `v-model` 命名；修饰符透传与处理；受控/非受控组件设计。
+
+4) provide/inject 与全局状态（Pinia）
+- 提示点：跨层解耦与可测试性；何时上升为 store；服务定位器反模式风险；SSR 中的作用域隔离。
+
+5) 路由与数据获取（Vue Router 4）
+- 提示点：导航守卫与权限；路由级懒加载；数据预取与错误边界；滚动行为与并发导航。
+
+6) 表单与校验
+- 提示点：受控字段的性能开销；`v-model` 与 `:modelValue + @update` 的权衡；异步校验与提交防抖；通用表单项抽象与 `slots`/attrs 透传。
+
+7) 性能优化
+- 提示点：`<KeepAlive>` 命中条件与缓存策略；`Teleport` 的适用场景；长列表虚拟化策略；避免不必要渲染（分片、`v-memo`、`defineComponent` 性能注意点）。
+
+8) SSR/同构
+- 提示点：避免直接访问 `window/document`；`onServerPrefetch`；水合不匹配定位；静态站点生成与增量再生的取舍。
+
+9) 生态与工程
+- 提示点：Vite 环境变量与多环境构建；按需引入与 Tree‑shaking；组件库（Element Plus/Naive UI）二次封装；单元/端到端测试基线。
+
+### Vue 3 深入场景（任选 2 深挖）
+A) 自定义表单控件的 `v-model` 设计
+- 场景：同一组件需要同时支持 `value` 与 `checked` 两种模型，并处理 `trim/number` 修饰符。
+- 追问：多模型命名与事件；修饰符透传方案；受控/非受控切换与受控警告。
+- 评估：契约清晰、边界覆盖、与表单生态的兼容。
+
+B) 长列表交互卡顿
+- 场景：1 万行列表，含筛选与高亮。
+- 追问：虚拟滚动窗口化；计算派生数据的缓存与切片；`watchEffect` 清理；渲染热点定位。
+- 评估：渲染与计算分离、体验不退化。
+
+C) SSR 水合不匹配排查
+- 场景：仅生产环境报水合警告。
+- 追问：非确定性渲染源（时间、随机数、异步）；`onServerPrefetch`；差异定位与兜底策略。
+- 评估：定位路径清晰、最小化影响。
+
+D) 复杂表单与依赖校验
+- 场景：多字段联动、异步唯一性校验。
+- 追问：字段依赖图；节流/去抖与取消；错误聚合与可用性；回填与重置策略。
+- 评估：一致性、可维护、性能友好。
+
