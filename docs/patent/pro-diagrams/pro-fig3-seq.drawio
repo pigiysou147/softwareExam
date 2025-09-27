@@ -1,0 +1,69 @@
+<mxfile host="app.diagrams.net" modified="2025-09-24T00:00:00.000Z" agent="AI" version="22.1.0" type="device">
+  <diagram id="pro-seq" name="Pro-Sequence">
+    <mxGraphModel grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Actor headers (boxed) -->
+        <mxCell id="a_user" value="用户" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FBFF;strokeColor=#2C3E50;" vertex="1" parent="1">
+          <mxGeometry x="120" y="120" width="140" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="a_ui" value="页面UI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FBFF;strokeColor=#2C3E50;" vertex="1" parent="1">
+          <mxGeometry x="340" y="120" width="140" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="a_router" value="Router中间件" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FBFF;strokeColor=#2C3E50;" vertex="1" parent="1">
+          <mxGeometry x="560" y="120" width="160" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="a_ondev" value="端侧模型" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FBFF;strokeColor=#2C3E50;" vertex="1" parent="1">
+          <mxGeometry x="780" y="120" width="140" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="a_llm" value="云侧LLM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FBFF;strokeColor=#2C3E50;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="120" width="140" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="a_solver" value="预算/求解器" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FBFF;strokeColor=#2C3E50;" vertex="1" parent="1">
+          <mxGeometry x="1220" y="120" width="160" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="a_sw" value="Service Worker" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8FBFF;strokeColor=#2C3E50;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="120" width="160" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- Lifelines -->
+        <mxCell id="l_user" style="shape=line;strokeColor=#95A5A6;endArrow=none;" edge="1" parent="1" source="a_user">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="190" y="160" as="target"/><mxPoint x="190" y="980" as="source"/></mxGeometry>
+        </mxCell>
+        <mxCell id="l_ui" style="shape=line;strokeColor=#95A5A6;endArrow=none;" edge="1" parent="1" source="a_ui">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="410" y="160" as="target"/><mxPoint x="410" y="980" as="source"/></mxGeometry>
+        </mxCell>
+        <mxCell id="l_router" style="shape=line;strokeColor=#95A5A6;endArrow=none;" edge="1" parent="1" source="a_router">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="640" y="160" as="target"/><mxPoint x="640" y="980" as="source"/></mxGeometry>
+        </mxCell>
+        <mxCell id="l_ondev" style="shape=line;strokeColor=#95A5A6;endArrow=none;" edge="1" parent="1" source="a_ondev">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="850" y="160" as="target"/><mxPoint x="850" y="980" as="source"/></mxGeometry>
+        </mxCell>
+        <mxCell id="l_llm" style="shape=line;strokeColor=#95A5A6;endArrow=none;" edge="1" parent="1" source="a_llm">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="1070" y="160" as="target"/><mxPoint x="1070" y="980" as="source"/></mxGeometry>
+        </mxCell>
+        <mxCell id="l_solver" style="shape=line;strokeColor=#95A5A6;endArrow=none;" edge="1" parent="1" source="a_solver">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="1300" y="160" as="target"/><mxPoint x="1300" y="980" as="source"/></mxGeometry>
+        </mxCell>
+        <mxCell id="l_sw" style="shape=line;strokeColor=#95A5A6;endArrow=none;" edge="1" parent="1" source="a_sw">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="1520" y="160" as="target"/><mxPoint x="1520" y="980" as="source"/></mxGeometry>
+        </mxCell>
+
+        <!-- Messages (orthogonal edges with waypoints) -->
+        <mxCell id="m1" value="点击/悬停/输入（触发候选路由）" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="a_user" target="a_ui"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="300" y="220"/></Array></mxGeometry></mxCell>
+        <mxCell id="m2" value="上报上下文（会话/网络/设备/候选）" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="a_ui" target="a_router"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="540" y="260"/></Array></mxGeometry></mxCell>
+        <mxCell id="m3" value="预测：路由概率/资源效用" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="a_router" target="a_ondev"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="750" y="320"/></Array></mxGeometry></mxCell>
+        <mxCell id="m4" value="低置信/冷启动 → 请求LLM" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="a_router" target="a_llm"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="970" y="380"/></Array></mxGeometry></mxCell>
+        <mxCell id="m5" value="返回：概率/效用/解释" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="a_llm" target="a_router"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="970" y="440"/></Array></mxGeometry></mxCell>
+        <mxCell id="m6" value="预算与约束求解请求" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="a_router" target="a_solver"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1200" y="500"/></Array></mxGeometry></mxCell>
+        <mxCell id="m7" value="分级预取计划" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="a_solver" target="a_router"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1200" y="560"/></Array></mxGeometry></mxCell>
+        <mxCell id="m8" value="下发计划" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="a_router" target="a_sw"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1440" y="620"/></Array></mxGeometry></mxCell>
+        <mxCell id="m9" value="并发下载/退避/SWR/动态TTL" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="a_sw" target="a_sw"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1520" y="700"/></Array></mxGeometry></mxCell>
+        <mxCell id="m10" value="命中或兜底 → UI" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=block;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="a_sw" target="a_ui"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="700" y="760"/></Array></mxGeometry></mxCell>
+        <mxCell id="m11" value="指标上报 → 离线评估/蒸馏" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="a_ui" target="a_llm"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="970" y="820"/></Array></mxGeometry></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
