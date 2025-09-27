@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1300" height="820" viewBox="0 0 1300 820">
+  <defs>
+    <style>
+      .title{font:700 20px Arial;fill:#2c3e50}
+      .layer{fill:#f4f7fb;stroke:#2c3e50;stroke-width:2}
+      .box{fill:#ffffff;stroke:#2c3e50;stroke-width:1.5}
+      .label{font:14px Arial;fill:#2c3e50}
+      .note{font:12px Arial;fill:#34495e}
+      .line{stroke:#2c3e50;stroke-width:2;fill:none;marker-end:url(#arr)}
+      .dashed{stroke-dasharray:6 6}
+    </style>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2c3e50"/>
+    </marker>
+  </defs>
+
+  <text x="650" y="40" text-anchor="middle" class="title">分层架构图（LLM 路由分级预取与缓存预算）</text>
+
+  <!-- Presentation Layer -->
+  <rect x="40" y="70" width="1220" height="170" rx="12" class="layer"/>
+  <text x="60" y="95" class="title">表示层（前端）</text>
+  <rect x="80" y="110" width="300" height="100" rx="8" class="box"/>
+  <text x="95" y="140" class="label">UI/页面与组件</text>
+  <text x="95" y="165" class="note">Skeleton/可用性提示</text>
+
+  <rect x="420" y="110" width="300" height="100" rx="8" class="box"/>
+  <text x="435" y="140" class="label">Router 中间件</text>
+  <text x="435" y="165" class="note">路由候选/策略执行/指标上报</text>
+
+  <rect x="760" y="110" width="300" height="100" rx="8" class="box"/>
+  <text x="775" y="140" class="label">端侧轻量模型</text>
+  <text x="775" y="165" class="note">路由概率/资源效用 本地推断</text>
+
+  <!-- Edge Layer -->
+  <rect x="40" y="260" width="1220" height="150" rx="12" class="layer"/>
+  <text x="60" y="285" class="title">边缘层</text>
+  <rect x="80" y="300" width="300" height="80" rx="8" class="box"/>
+  <text x="95" y="330" class="label">边缘策略控制</text>
+  <text x="95" y="350" class="note">策略下发/灰度/回滚</text>
+
+  <rect x="420" y="300" width="300" height="80" rx="8" class="box"/>
+  <text x="435" y="330" class="label">边缘缓存与改写</text>
+  <text x="435" y="350" class="note">路由改写/Cache-Control</text>
+
+  <!-- Execution Layer -->
+  <rect x="40" y="430" width="1220" height="170" rx="12" class="layer"/>
+  <text x="60" y="455" class="title">执行层（SW/缓存/网络）</text>
+  <rect x="80" y="480" width="300" height="100" rx="8" class="box"/>
+  <text x="95" y="510" class="label">Service Worker 执行器</text>
+  <text x="95" y="535" class="note">优先队列/并发/退避/SWR/动态TTL</text>
+
+  <rect x="420" y="480" width="300" height="100" rx="8" class="box"/>
+  <text x="435" y="510" class="label">缓存与存储</text>
+  <text x="435" y="535" class="note">CacheStorage/IndexedDB</text>
+
+  <rect x="760" y="480" width="300" height="100" rx="8" class="box"/>
+  <text x="775" y="510" class="label">网络与带宽预算</text>
+  <text x="775" y="535" class="note">预算/限流/降级/取消</text>
+
+  <!-- Intelligence Layer -->
+  <rect x="40" y="620" width="1220" height="160" rx="12" class="layer"/>
+  <text x="60" y="645" class="title">智能与策略层（云侧）</text>
+  <rect x="80" y="670" width="300" height="80" rx="8" class="box"/>
+  <text x="95" y="700" class="label">大模型策略服务</text>
+  <text x="95" y="720" class="note">路由概率/资源效用/解释</text>
+
+  <rect x="420" y="670" width="300" height="80" rx="8" class="box"/>
+  <text x="435" y="700" class="label">预算约束求解</text>
+  <text x="435" y="720" class="note">等级/时序/TTL/淘汰优先级</text>
+
+  <rect x="760" y="670" width="300" height="80" rx="8" class="box"/>
+  <text x="775" y="700" class="label">离线评估与蒸馏</text>
+  <text x="775" y="720" class="note">反事实评估/Teacher→Student</text>
+
+  <!-- flows -->
+  <path class="line" d="M 570 210 L 570 300"/>
+  <text x="585" y="260" class="note">策略控制</text>
+
+  <path class="line" d="M 920 210 L 920 670"/>
+  <text x="935" y="440" class="note">模型/阈值/版本</text>
+
+  <path class="line" d="M 570 380 L 570 480"/>
+  <text x="585" y="430" class="note">边缘改写/缓存 → 执行</text>
+
+  <path class="line dashed" d="M 230 540 L 910 670"/>
+  <text x="600" y="620" class="note">日志与指标 → 离线评估/蒸馏</text>
+
+  <path class="line" d="M 570 670 L 570 210"/>
+  <text x="585" y="610" class="note">策略/阈值下发</text>
+</svg>

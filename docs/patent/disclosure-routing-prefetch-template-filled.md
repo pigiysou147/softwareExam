@@ -27,7 +27,7 @@
 在固定预算内最大化首屏与二跳收益，自适应网络/设备差异，具备可解释审计与灰度回滚；端云蒸馏实现端侧毫秒级推断。
 
 ## 六、附图说明
-- 图1 系统架构图（`docs/patent/pro-diagrams/pro-fig1-arch.png`）
+- 图1 分层架构图（`docs/patent/pro-diagrams/pro-fig1-layered-arch.png`，备选：`docs/patent/pro-diagrams/pro-fig1-arch.png`）
 - 图2 程序逻辑流程图（`docs/patent/pro-diagrams/pro-fig2-flow.png`）
 - 图3 界面交互时序图（`docs/patent/pro-diagrams/pro-fig3-seq.png`）
 - 图4 异常与降级处理流程图（`docs/patent/pro-diagrams/pro-fig4-exception.png`）
