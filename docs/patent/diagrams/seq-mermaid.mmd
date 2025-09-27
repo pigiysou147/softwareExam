@@ -1,0 +1,36 @@
+sequenceDiagram
+    participant U as 用户
+    participant UI as 页面UI
+    participant R as Router
+    participant M as 端侧模型
+    participant L as 云侧LLM
+    participant S as 求解器
+    participant SW as ServiceWorker
+    participant B as 后端
+    participant C as 缓存
+
+    U ->> UI: 触发路由
+    UI ->> R: 上下文上报
+    activate R
+    R ->> M: 概率与效用预测
+    M -->> R: 打分与置信度
+    alt 置信度低
+        R ->> L: 策略推断请求
+        L -->> R: 概率-效用-解释
+    end
+    R ->> S: 约束求解请求
+    S -->> R: 分级预取计划
+    R ->> SW: 下发预取计划
+    deactivate R
+
+    SW ->> C: 写入缓存
+    UI ->> C: 读取缓存
+    alt 命中
+        C -->> UI: 资源数据
+    else 未命中
+        UI ->> B: 兜底请求
+        B -->> UI: 响应
+    end
+
+    UI ->> R: 指标上报
+    R -->> L: 采样日志-离线评估
