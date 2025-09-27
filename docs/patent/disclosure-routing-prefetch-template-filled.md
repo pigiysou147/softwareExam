@@ -71,6 +71,33 @@ sequenceDiagram
     R -->> L: 采样日志-离线评估
 ```
 
+Mermaid（图3更简化版，源码：`docs/patent/diagrams/seq-mermaid-simple.mmd`）
+```mermaid
+sequenceDiagram
+    participant U as 用户
+    participant UI as 页面UI
+    participant R as Router
+    participant CL as 云侧策略
+    participant SW as ServiceWorker
+    participant C as 缓存
+
+    U ->> UI: 触发路由
+    UI ->> R: 上下文上报
+    R ->> CL: 策略/约束请求
+    CL -->> R: 分级预取计划
+    R ->> SW: 下发预取计划
+    SW ->> C: 写入缓存
+    UI ->> C: 读取缓存
+    alt 命中
+        C -->> UI: 资源
+    else 未命中
+        UI ->> CL: 回源请求
+        CL -->> UI: 响应
+    end
+    UI ->> R: 指标上报
+    R -->> CL: 采样日志
+```
+
 - 图4 异常与降级处理流程图（`docs/patent/pro-diagrams/pro-fig4-exception.png`）
 - 图5 数据结构示意图（`docs/patent/pro-diagrams/pro-fig5-classes.png`）
 
