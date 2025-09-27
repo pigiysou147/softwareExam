@@ -1,0 +1,92 @@
+<mxfile host="app.diagrams.net" modified="2025-09-24T00:00:00.000Z" agent="AI" version="22.1.0" type="device">
+  <diagram id="arch1" name="Page-1">
+    <mxGraphModel grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Columns / Lanes -->
+        <mxCell id="client" value="客户端" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" vertex="1" parent="1">
+          <mxGeometry x="80" y="80" width="420" height="780" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge" value="边缘网关" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;" vertex="1" parent="1">
+          <mxGeometry x="520" y="80" width="320" height="780" as="geometry"/>
+        </mxCell>
+        <mxCell id="cloud" value="云侧" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;" vertex="1" parent="1">
+          <mxGeometry x="860" y="80" width="420" height="780" as="geometry"/>
+        </mxCell>
+
+        <!-- Client modules -->
+        <mxCell id="ui" value="UI/页面" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2C3E50;portConstraint=eastwest;" vertex="1" parent="1">
+          <mxGeometry x="100" y="120" width="380" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="router" value="Router 中间件" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2C3E50;portConstraint=eastwest;" vertex="1" parent="1">
+          <mxGeometry x="100" y="200" width="380" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="plan" value="预取计划（等级/时序/TTL）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2C3E50;portConstraint=eastwest;" vertex="1" parent="1">
+          <mxGeometry x="100" y="280" width="380" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="sw" value="Service Worker 执行器" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2C3E50;portConstraint=eastwest;" vertex="1" parent="1">
+          <mxGeometry x="100" y="360" width="380" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="cache" value="缓存存储" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2C3E50;portConstraint=eastwest;" vertex="1" parent="1">
+          <mxGeometry x="100" y="440" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="ondev" value="端侧轻量模型" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2C3E50;portConstraint=eastwest;" vertex="1" parent="1">
+          <mxGeometry x="300" y="440" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="telemetry" value="埋点/画像采集" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2C3E50;portConstraint=eastwest;" vertex="1" parent="1">
+          <mxGeometry x="100" y="520" width="380" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Edge modules -->
+        <mxCell id="edge_ctrl" value="策略下发 / 灰度与回滚" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2C3E50;portConstraint=eastwest;" vertex="1" parent="1">
+          <mxGeometry x="540" y="200" width="280" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Cloud modules -->
+        <mxCell id="llm" value="大模型策略服务（路由概率/资源效用/解释）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2C3E50;portConstraint=eastwest;" vertex="1" parent="1">
+          <mxGeometry x="880" y="160" width="380" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="solver" value="预算约束求解 / 阈值生成" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2C3E50;portConstraint=eastwest;" vertex="1" parent="1">
+          <mxGeometry x="880" y="240" width="380" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="repo" value="策略/版本/白名单" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2C3E50;portConstraint=eastwest;" vertex="1" parent="1">
+          <mxGeometry x="880" y="320" width="380" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="offline" value="反事实评估 / 训练与蒸馏" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2C3E50;portConstraint=eastwest;" vertex="1" parent="1">
+          <mxGeometry x="880" y="400" width="380" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Edges (orthogonal, fixed entry/exit) -->
+        <mxCell id="e_req" value="策略请求/候选" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" edge="1" parent="1" source="router" target="edge_ctrl">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_forward" value="转发" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" edge="1" parent="1" source="edge_ctrl" target="llm">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_reply" value="返回策略与阈值" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;exitX=0;exitY=0.5;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;" edge="1" parent="1" source="solver" target="edge_ctrl">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_deliver" value="下发" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;exitX=0;exitY=0.5;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;" edge="1" parent="1" source="edge_ctrl" target="router">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_plan2sw" value="下发计划" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" edge="1" parent="1" source="plan" target="sw">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_sw2cache" value="写入缓存" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;exitX=0.25;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" edge="1" parent="1" source="sw" target="cache">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e_telemetry" value="日志与指标（采样）" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=block;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" edge="1" parent="1" source="telemetry" target="offline">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Cloud wiring LLM -> Solver (internal) -->
+        <mxCell id="e_llm2solver" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" edge="1" parent="1" source="llm" target="solver">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
