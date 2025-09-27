@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" modified="2025-09-24T00:00:00.000Z" agent="AI" version="22.1.0" type="device">
   <diagram id="seq1" name="Sequence">
-    <mxGraphModel grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
@@ -46,15 +46,15 @@
         </mxCell>
 
         <!-- Messages (orthogonal edges with fixed ports) -->
-        <mxCell id="m1" value="点击/悬停/输入" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="a_user" target="a_ui"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="m2" value="上报上下文" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="a_ui" target="a_router"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="m3" value="预测 概率/效用" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="a_router" target="a_ondev"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="m4" value="低置信/冷启动 请求LLM" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="a_router" target="a_llm"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="m5" value="返回 概率/效用/解释" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="a_llm" target="a_router"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="m6" value="预算与约束求解请求" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="a_router" target="a_solver"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="m7" value="分级预取计划" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="a_solver" target="a_router"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="m8" value="下发计划" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="a_router" target="a_ui"><mxGeometry relative="1" as="geometry"/></mxCell>
-        <mxCell id="m9" value="命中或兜底 → UI" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="a_ondev" target="a_ui"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="m1" value="点击/悬停/输入" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="a_user" target="a_ui"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="255" y="220"/></Array></mxGeometry></mxCell>
+        <mxCell id="m2" value="上报上下文" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="a_ui" target="a_router"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="455" y="260"/></Array></mxGeometry></mxCell>
+        <mxCell id="m3" value="预测 概率/效用" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="a_router" target="a_ondev"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="655" y="320"/></Array></mxGeometry></mxCell>
+        <mxCell id="m4" value="低置信/冷启动 请求LLM" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="a_router" target="a_llm"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="855" y="380"/></Array></mxGeometry></mxCell>
+        <mxCell id="m5" value="返回 概率/效用/解释" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="a_llm" target="a_router"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="855" y="440"/></Array></mxGeometry></mxCell>
+        <mxCell id="m6" value="预算与约束求解请求" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="a_router" target="a_solver"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1110" y="500"/></Array></mxGeometry></mxCell>
+        <mxCell id="m7" value="分级预取计划" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="a_solver" target="a_router"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1110" y="560"/></Array></mxGeometry></mxCell>
+        <mxCell id="m8" value="下发计划" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="a_router" target="a_ui"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="455" y="620"/></Array></mxGeometry></mxCell>
+        <mxCell id="m9" value="命中或兜底 → UI" style="edgeStyle=orthogonalEdgeStyle;dashed=1;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="a_ondev" target="a_ui"><mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="455" y="680"/></Array></mxGeometry></mxCell>
       </root>
     </mxGraphModel>
   </diagram>
