@@ -1,0 +1,90 @@
+<mxfile host="app.diagrams.net" modified="2025-09-24T00:00:00.000Z" agent="AI" version="22.1.0" type="device">
+  <diagram id="pro-seq-uml" name="UML-Sequence">
+    <mxGraphModel grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Participants (UML lifeline headers) -->
+        <mxCell id="p_user" value=": 用户" style="shape=umlLifeline;html=1;container=0;dropTarget=0;" vertex="1" parent="1">
+          <mxGeometry x="70" y="80" width="140" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="p_ui" value=": 页面UI" style="shape=umlLifeline;html=1;container=0;dropTarget=0;" vertex="1" parent="1">
+          <mxGeometry x="230" y="80" width="140" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="p_router" value=": Router" style="shape=umlLifeline;html=1;container=0;dropTarget=0;" vertex="1" parent="1">
+          <mxGeometry x="410" y="80" width="160" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="p_ondev" value=": 端侧模型" style="shape=umlLifeline;html=1;container=0;dropTarget=0;" vertex="1" parent="1">
+          <mxGeometry x="610" y="80" width="160" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="p_llm" value=": 云侧LLM" style="shape=umlLifeline;html=1;container=0;dropTarget=0;" vertex="1" parent="1">
+          <mxGeometry x="810" y="80" width="160" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="p_solver" value=": 预算/求解器" style="shape=umlLifeline;html=1;container=0;dropTarget=0;" vertex="1" parent="1">
+          <mxGeometry x="1010" y="80" width="160" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- Lifelines (dashed vertical) -->
+        <mxCell id="l_user" style="shape=line;dashed=1;strokeColor=#95A5A6;endArrow=none;" edge="1" parent="1" source="p_user">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="140" y="820" as="target"/><mxPoint x="140" y="120" as="source"/></mxGeometry>
+        </mxCell>
+        <mxCell id="l_ui" style="shape=line;dashed=1;strokeColor=#95A5A6;endArrow=none;" edge="1" parent="1" source="p_ui">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="300" y="820" as="target"/><mxPoint x="300" y="120" as="source"/></mxGeometry>
+        </mxCell>
+        <mxCell id="l_router" style="shape=line;dashed=1;strokeColor=#95A5A6;endArrow=none;" edge="1" parent="1" source="p_router">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="490" y="820" as="target"/><mxPoint x="490" y="120" as="source"/></mxGeometry>
+        </mxCell>
+        <mxCell id="l_ondev" style="shape=line;dashed=1;strokeColor=#95A5A6;endArrow=none;" edge="1" parent="1" source="p_ondev">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="690" y="820" as="target"/><mxPoint x="690" y="120" as="source"/></mxGeometry>
+        </mxCell>
+        <mxCell id="l_llm" style="shape=line;dashed=1;strokeColor=#95A5A6;endArrow=none;" edge="1" parent="1" source="p_llm">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="890" y="820" as="target"/><mxPoint x="890" y="120" as="source"/></mxGeometry>
+        </mxCell>
+        <mxCell id="l_solver" style="shape=line;dashed=1;strokeColor=#95A5A6;endArrow=none;" edge="1" parent="1" source="p_solver">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="1090" y="820" as="target"/><mxPoint x="1090" y="120" as="source"/></mxGeometry>
+        </mxCell>
+
+        <!-- Activations (narrow rectangles aligned to lifelines) -->
+        <mxCell id="act_router_1" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F6FF;strokeColor=#2C3E50;" vertex="1" parent="1">
+          <mxGeometry x="484" y="260" width="12" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_router_2" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F6FF;strokeColor=#2C3E50;" vertex="1" parent="1">
+          <mxGeometry x="484" y="520" width="12" height="150" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_ondev_1" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF6E5;strokeColor=#2C3E50;" vertex="1" parent="1">
+          <mxGeometry x="684" y="320" width="12" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_solver_1" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F1F8E9;strokeColor=#2C3E50;" vertex="1" parent="1">
+          <mxGeometry x="1084" y="540" width="12" height="110" as="geometry"/>
+        </mxCell>
+
+        <!-- Messages (orthogonal arrows with labels) -->
+        <mxCell id="m1" value="1. 点击/悬停/输入" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="p_user" target="p_ui">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="220" y="200"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="m2" value="2. 上报上下文" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="p_ui" target="p_router">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="420" y="240"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="m3" value="3. 预测 概率/效用" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="p_router" target="p_ondev">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="620" y="320"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="m4" value="4. 低置信/冷启动 → 请求LLM" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="p_router" target="p_llm">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="820" y="380"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="m5" value="5. 返回 概率/效用/解释" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="p_llm" target="p_router">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="820" y="440"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="m6" value="6. 预算与约束求解请求" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="p_router" target="p_solver">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1040" y="500"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="m7" value="7. 分级预取计划" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=block;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="p_solver" target="p_router">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1040" y="560"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="m8" value="8. 下发计划至 SW" style="edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;endArrow=block;exitX=1;exitY=0.5;" edge="1" parent="1" source="p_router" target="p_ui">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="420" y="620"/></Array></mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
