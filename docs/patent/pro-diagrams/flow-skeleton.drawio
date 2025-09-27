@@ -1,0 +1,67 @@
+<mxfile host="app.diagrams.net" modified="2025-09-24T00:00:00.000Z" agent="AI" version="22.1.0" type="device">
+  <diagram id="flow1" name="Flow">
+    <mxGraphModel grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Row 1 -->
+        <mxCell id="s1" value="S1 采集上下文 / 路由资源图" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2C3E50;portConstraint=eastwest;" vertex="1" parent="1">
+          <mxGeometry x="140" y="140" width="360" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="s2" value="S2 大模型预测 概率/效用/解释" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2C3E50;portConstraint=eastwest;" vertex="1" parent="1">
+          <mxGeometry x="570" y="140" width="360" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="s2b" value="合成候选集" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2C3E50;portConstraint=eastwest;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="140" width="360" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- Row 2 -->
+        <mxCell id="s3" value="S3 建模约束：带宽/CPU/存储/隐私/权限" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2C3E50;portConstraint=eastwest;" vertex="1" parent="1">
+          <mxGeometry x="140" y="280" width="360" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="s4" value="预算求解：等级/时序/TTL/淘汰优先级" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2C3E50;portConstraint=eastwest;" vertex="1" parent="1">
+          <mxGeometry x="570" y="280" width="360" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="s4b" value="生成分级预取计划" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2C3E50;portConstraint=eastwest;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="280" width="360" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- Row 3 -->
+        <mxCell id="s5" value="下发计划至 Service Worker" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2C3E50;portConstraint=eastwest;" vertex="1" parent="1">
+          <mxGeometry x="140" y="420" width="360" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="s6" value="SW 执行：优先队列/并发/退避/SWR/动态TTL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2C3E50;portConstraint=eastwest;" vertex="1" parent="1">
+          <mxGeometry x="570" y="420" width="360" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="s6b" value="状态变化：重排/取消/降级/动态TTL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2C3E50;portConstraint=eastwest;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="420" width="360" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- Row 4 -->
+        <mxCell id="s7" value="路由切换：先读缓存 未命中兜底" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2C3E50;portConstraint=eastwest;" vertex="1" parent="1">
+          <mxGeometry x="140" y="560" width="360" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="s8" value="记录指标：命中/耗时/带宽/回退" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2C3E50;portConstraint=eastwest;" vertex="1" parent="1">
+          <mxGeometry x="570" y="560" width="360" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="s9" value="反事实评估：阈值/预算校准 & 可选更新端侧模型/灰度" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2C3E50;portConstraint=eastwest;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="560" width="360" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- Edges (orthogonal, fixed ports) -->
+        <mxCell id="e1" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" edge="1" parent="1" source="s1" target="s2"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e2" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" edge="1" parent="1" source="s2" target="s2b"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e3" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" edge="1" parent="1" source="s2b" target="s3"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e4" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" edge="1" parent="1" source="s3" target="s4"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e5" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" edge="1" parent="1" source="s4" target="s4b"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e6" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" edge="1" parent="1" source="s4b" target="s5"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e7" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" edge="1" parent="1" source="s5" target="s6"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e8" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" edge="1" parent="1" source="s6" target="s6b"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e9" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" edge="1" parent="1" source="s6b" target="s7"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e10" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" edge="1" parent="1" source="s7" target="s8"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e11" value="" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" edge="1" parent="1" source="s8" target="s9"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
