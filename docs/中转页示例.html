@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>域名升级通知与自动跳转</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="canonical" href="https://yzhcs.fszsj.fs.gdgov.cn">
+  <!-- 如需彻底禁止缓存，请在网关/服务端设置响应头：Cache-Control: no-store -->
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "Microsoft Yahei", sans-serif; margin:0; padding:0; background:#f6f7f9; color:#1f2328; }
+    .container { max-width: 720px; margin: 12vh auto 0; background: #fff; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,.06); padding: 32px; }
+    h1 { margin: 0 0 12px; font-size: 22px; }
+    p { margin: 8px 0; line-height: 1.7; }
+    a { color: #0b69c7; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .hint { background:#f0f7ff; border:1px solid #cfe3ff; padding:12px 16px; border-radius:8px; margin-top:12px; }
+    .count { font-weight:bold; }
+    .footer { margin-top: 24px; color:#6a737d; font-size: 13px; }
+  </style>
+  <noscript>
+    <meta http-equiv="refresh" content="5;url=https://yzhcs.fszsj.fs.gdgov.cn">
+  </noscript>
+</head>
+<body>
+  <div class="container">
+    <h1>域名升级通知</h1>
+    <p>为提升服务质量与安全水平，平台域名已升级为
+      <a href="https://yzhcs.fszsj.fs.gdgov.cn">https://yzhcs.fszsj.fs.gdgov.cn</a>。</p>
+    <p>旧域名 <code>https://fzh.ywtg.foshan.gov.cn</code> 将于 <strong>请填写停用日期</strong> 正式停用。</p>
+    <div class="hint">
+      系统将在 <span id="counter" class="count">5</span> 秒后自动跳转至新域名；若未跳转，请点击上述链接手动访问。
+    </div>
+    <div class="footer">如有问题，请联系平台运维或网关实施同学协助排查。</div>
+  </div>
+
+  <script>
+    (function () {
+      var NEW_ORIGIN = 'https://yzhcs.fszsj.fs.gdgov.cn';
+      function buildTarget() {
+        try {
+          return NEW_ORIGIN + location.pathname + location.search + location.hash;
+        } catch (e) {
+          return NEW_ORIGIN;
+        }
+      }
+      try {
+        var left = 5;
+        var el = document.getElementById('counter');
+        var t = setInterval(function () {
+          left -= 1;
+          if (el) el.textContent = String(left);
+          if (left <= 0) {
+            clearInterval(t);
+            location.replace(buildTarget());
+          }
+        }, 1000);
+      } catch (e) {
+        // 兜底：发生异常也强制跳转
+        location.replace(buildTarget());
+      }
+    })();
+  </script>
+</body>
+</html>
